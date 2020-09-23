@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">a {text-decoration: none}</style>
+</head>
+<body>
+Todos<br>
+<form action="/list" method="post">
+    <input type="text" name="matter" placeholder="What needs to be done?">
+    <input type="submit" value="submit">
+</form>
+<form action="/complete" method="post">
+    <table>
+        {{range .}}
+            <tr>
+                <td>
+                    {{if .Status}}
+                        <input type="checkbox" name="matter_list" value="{{.Id}}" checked="checked"/>{{.Matter}}
+                        <input type="hidden" name="matter_list" value="0">
+                    {{else}}
+                        <input type="checkbox" name="matter_list" value="{{.Id}}" />{{.Matter}}
+                    {{end}}
+                </td>
+                <td><a href="/delete?id={{.Id}}">X</a></td>
+            </tr>
+        {{end}}
+    </table>
+    <input type="submit" value="complete" /><br>
+    <a href="/list" >All</a>
+    <a href="/active" >Active</a>
+    <a href="/completed" >Completed</a>
+    <a href="/clear">Clear completed</a>
+</form>
+</body>
+</html>
