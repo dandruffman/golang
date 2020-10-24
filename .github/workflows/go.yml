@@ -3,22 +3,21 @@ on: [push,pull_request]
 jobs:
   lint:
     name: Lint
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
-    - name: Set up Go 1.12
-      uses: actions/setup-go@v1
+    - name: Set up Go 1.x
+      uses: actions/setup-go@v2
       with:
-        go-version: 1.12
-      id: go
-    - name: Code
-      uses: actions/checkout@v1
+        go-version: ^1.13
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v2
     - name: Intsall Golangci-lint 
       run: curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s -- -b . latest
     - name: Lint
       run: ./golangci-lint run ./...
       
   test:
-    needs: Lint
+    needs: lint
     name: Unit Testing
     runs-on: ${{ matrix.os }}
     strategy:
