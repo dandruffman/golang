@@ -34,7 +34,7 @@ jobs:
         which migrate
 
     - name: Run migrations
-      run: migrate -path db/migration -database "postgresql://postgres:123456@127.0.0.1:5432/simple_bank?sslmode=disable" -verbose up
+      run: migrate -path db/migration -database "postgresql://postgres:123@127.0.0.1:5432/auth1_test?sslmode=disable" -verbose up
 
     - name: Test
       run: go test -count=1 -v -cover ./...
