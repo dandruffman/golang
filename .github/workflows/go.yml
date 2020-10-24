@@ -29,5 +29,5 @@ jobs:
             dep ensure
         fi
 
-    - name: Run
-      run: go run main.go
+    - name: Build
+      run: go build
